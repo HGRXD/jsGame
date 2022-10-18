@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>가위바위보</title>
+        <style>
+            div {
+                width: 200px;
+                height: 150px;
+                background-color: aquamarine;
+                padding: 0;
+                margin: 0;
+            }
+            #player {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+                display: flex;
+                justify-content: space-around;
+            }
+            li {
+                border: solid black 5px;
+                background-color: white;
+                margin: 2px;
+            }
+            .times {
+                display: inline;
+            }
+            .game {
+                display: inline;                
+            }
+            li:active {
+                border: solid black 7px;
+                margin: 0;
+            }
+            a:visited, a {
+                color: black;
+                text-decoration-line: none;
+            }
+            
+        </style>
+    </head>
+    <body>  
+        <div>
+            <p class="game">상대방: </p>
+            <p id="ai" class="game"></p><br>
+            <p class="game">나: </p>
+            <p id="playerResult" class="game"></p><br>
+            <ul id="player">
+                <li id="sci" onclick="GOscissor();"><a href="#">가위</a></li>
+                <li id="rock" onclick="GOrock();"><a href="#">바위</a></li>
+                <li id="paper" onclick="GOpaper();"><a href="#">보</a></li>
+            </ul>
+            <p id="result">결과</p>
+            <p id="reset" onclick="reset();">초기화</p>
+            <p class="times">이긴횟수:</p>
+            <p id="win" class="times">0</p><br>
+            <p class="times">진횟수:</p>
+            <p id="lose" class="times">0</p><br>
+            <p class="times">비긴횟수:</p>
+            <p id="draw" class="times">0</p>
+        </div>
+        
+        <script>
+            function getEle(id) {
+                return document.getElementById(id);
+            }
+
+            function getEleVal(id) {
+                getEle(id).value;
+            }
+            // 0은 보 1은 가위 2는 바위// 
+            var ai = 0;
+            var scissor = getEle("sci");
+            var rock = getEle("rock");
+            var paper = getEle("paper");
+            var aiResult = getEle("ai");
+            var playerResult = getEle("playerResult");
+            var result = getEle("result");
+            var win = 1;
+            var lose = 1;
+            var draw = 1;
+            var RESwin = getEle("win")
+            var RESlose = getEle("lose")
+            var RESdraw = getEle("draw")
+            function GOrock() {
+                var ai = Math.floor(Math.random()*3);
+                console.log(ai)
+                if (ai == 2) {
+                    aiResult.innerText = '바위'
+                    playerResult.innerText = '바위'
+                    result.innerText = '비겼다.'
+                    RESdraw.innerText = draw++;
+                } else if (ai == 1) {
+                    aiResult.innerText = '가위'
+                    playerResult.innerText = '바위'
+                    result.innerText = '이겼다.'
+                    RESwin.innerText = win++;
+                } else if (ai == 0) {
+                    aiResult.innerText = '보'
+                    playerResult.innerText = '바위'
+                    result.innerText = '졌다.'
+                    RESlose.innerText = lose++;
+                } 
+            }
+            function GOscissor() {
+                var ai = Math.floor(Math.random()*3);
+                console.log(ai)
+                if (ai == 2) {
+                    aiResult.innerText = '바위'
+                    playerResult.innerText = '가위'
+                    result.innerText = '졌다.'
+                    RESlose.innerText = lose++;
+                } else if (ai == 1) {
+                    aiResult.innerText = '가위'
+                    playerResult.innerText = '가위'
+                    result.innerText = '비겼다.'
+                    RESdraw.innerText = draw++;
+                } else if (ai == 0) {
+                    aiResult.innerText = '보'
+                    playerResult.innerText = '가위'
+                    result.innerText = '이겼다.'
+                    RESwin.innerText = win++;
+                } 
+            }
+            function GOpaper() {
+                var ai = Math.floor(Math.random()*3);
+                console.log(ai)
+                if (ai == 2) {
+                    aiResult.innerText = '바위'
+                    playerResult.innerText = '보'
+                    result.innerText = '이겼다.'
+                    RESwin.innerText = win++;
+                } else if (ai == 1) {
+                    aiResult.innerText = '가위'
+                    playerResult.innerText = '보'
+                    result.innerText = '졌다.'
+                    RESlose.innerText = lose++;
+                } else if (ai == 0) {
+                    aiResult.innerText = '보'
+                    playerResult.innerText = '보'
+                    result.innerText = '비겼다.'
+                    RESdraw.innerText = draw++;
+                } 
+            }
+            function reset() {
+                window.location.reload();
+            }
+        </script>
+    </body>
+</html>
